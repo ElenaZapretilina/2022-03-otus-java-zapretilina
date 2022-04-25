@@ -20,9 +20,9 @@ public class CustomerService {
 
     public Map.Entry<Customer, String> getNext(Customer customer) {
         Map.Entry<Customer, String>  treeCustomerCopy = treeCustomer.higherEntry(customer);
-
-        Objects.requireNonNull(treeCustomerCopy);
-
+        if (treeCustomerCopy == null) {
+            return null;
+        }
         return Map.entry(new Customer(treeCustomerCopy.getKey()), treeCustomerCopy.getValue());
     }
 
