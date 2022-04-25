@@ -38,3 +38,4 @@ out
 *.idea
 /.idea/
 
+/hw02-generics/src/main/java/demo/
