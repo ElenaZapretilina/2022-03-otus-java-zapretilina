@@ -3,7 +3,7 @@ package homework;
 import java.util.Deque;
 import java.util.LinkedList;
 
-public class CustomerReverseOrder <E>{
+public class CustomerReverseOrder {
     //todo: 2. надо реализовать методы этого класса
     //LinkedList<Customer> lstCustomer = new LinkedList<>();
     Deque<Customer> lstCustomer = new LinkedList<>();
