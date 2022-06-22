@@ -30,7 +30,7 @@ public class Summator {
         }
     }
 
-    public int getSum() {
+    public Integer getSum() {
         return sum;
     }
 
