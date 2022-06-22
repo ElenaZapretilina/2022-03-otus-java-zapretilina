@@ -34,19 +34,19 @@ public class Summator {
         return sum;
     }
 
-    public int getPrevValue() {
+    public Integer getPrevValue() {
         return prevValue;
     }
 
-    public int getPrevPrevValue() {
+    public Integer getPrevPrevValue() {
         return prevPrevValue;
     }
 
-    public int getSumLastThreeValues() {
+    public Integer getSumLastThreeValues() {
         return sumLastThreeValues;
     }
 
-    public int getSomeValue() {
+    public Integer getSomeValue() {
         return someValue;
     }
 }
