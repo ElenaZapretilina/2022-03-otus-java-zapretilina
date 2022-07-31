@@ -19,7 +19,7 @@ class Ioc {
 
     static class DemoInvocationHandler implements InvocationHandler {
         private final TestLoggingInterface myClass;
-        private final ArrayList<Method> listAnnotation = new ArrayList<>();
+        ArrayList<Method> listAnnotation = new ArrayList<>();
 
         DemoInvocationHandler(TestLoggingInterface myClass) {
             this.myClass = myClass;
