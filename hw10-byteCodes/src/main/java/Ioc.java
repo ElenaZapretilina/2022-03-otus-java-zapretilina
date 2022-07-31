@@ -3,6 +3,7 @@ import annotations.Log;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 class Ioc {
@@ -18,18 +19,24 @@ class Ioc {
 
     static class DemoInvocationHandler implements InvocationHandler {
         private final TestLoggingInterface myClass;
+        private final ArrayList<Method> listAnnotation = new ArrayList<>();
 
         DemoInvocationHandler(TestLoggingInterface myClass) {
-
             this.myClass = myClass;
-
+            for (Method declaredMethod : myClass.getClass().getDeclaredMethods()) {
+                if (declaredMethod.isAnnotationPresent(Log.class)) {
+                    listAnnotation.add(declaredMethod);
+                }
+            }
         }
 
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-            var hasAnnotation = myClass.getClass().getDeclaredMethod(method.getName(), method.getParameterTypes()).isAnnotationPresent(Log.class);
-            if (hasAnnotation) {
-                System.out.println("invoking method:executed method: " + method.getName() + ", param:" + Arrays.toString(args));
+            //  var hasAnnotation = myClass.getClass().getDeclaredMethod(method.getName(), method.getParameterTypes()).isAnnotationPresent(Log.class);
+            for (Method logAnnotatedMethod : listAnnotation) {
+                if (logAnnotatedMethod.getName().equals(method.getName()) && Arrays.equals(logAnnotatedMethod.getParameterTypes(), method.getParameterTypes())) {
+                    System.out.println("executed method: " + method.getName() + ", param:" + Arrays.toString(args));
+                }
             }
             return method.invoke(myClass, args);
         }
