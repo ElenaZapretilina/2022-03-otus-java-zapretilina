@@ -20,5 +20,11 @@ public class ProcessorAggregator implements Processor {
                         Measurement::getValue,
                         Double::sum,
                         LinkedHashMap::new));
+        /* изучить
+        return data.stream()
+                .collect(Collectors.groupingBy
+                        (Measurement::getName,TreeMap::new,
+                                Collectors.summingDouble(Measurement::getValue)));
+        */
     }
 }

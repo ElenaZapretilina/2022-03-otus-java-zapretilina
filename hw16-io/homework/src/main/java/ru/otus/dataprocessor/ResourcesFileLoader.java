@@ -17,8 +17,6 @@ import java.util.List;
 
 public class ResourcesFileLoader implements Loader {
     private String fileName;
-    private final ObjectMapper mapper = new ObjectMapper();
-
 
     public ResourcesFileLoader(String fileName) {
         this.fileName = fileName;
@@ -28,11 +26,11 @@ public class ResourcesFileLoader implements Loader {
     public List<Measurement> load() {
         //читает файл, парсит и возвращает результат
         var gson = new Gson();
-        var is = ResourcesFileLoader.class.getClassLoader().getResourceAsStream(fileName);
+        Measurement[] result; //= new Measurement[0];
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        Measurement[] result = new Measurement[0];
-        try {
+        //Закрывать обязательно, поэтому в try
+        try (var is = ResourcesFileLoader.class.getClassLoader().getResourceAsStream(fileName)) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             result = gson.fromJson(reader.readLine(), Measurement[].class);
         } catch (IOException e) {
             throw new RuntimeException(e);
